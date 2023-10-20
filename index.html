@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content=""width=device-width, inital-scale="1.0">
+        <script src="https://cdn.tailwindcss.com" ></script>
+        <script src="https://unpkg.com/htmx.org@1.9.5"></script>
+        <script src="https://unpkg.com/hyperscript.org@0.9.11"></script>
+        <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
+    </head>
+    <body class="bg-gray-100 w-full h-screen flex flex-col items-center">
+        <h1 class="text-3xl font-bold underline my-5">
+           BUN Bucket App
+        </h1>
+        <main class="container mx-auto w-full max-w-xl p-5 bg-white shadow-md rounded-md">
+            <form class="mb-4"
+                  hx-target="#items"
+                  hx-ext="json-enc"
+                  _="on submit target.reset()"
+                  hx-post="/items"
+            >
+                  <label for="item"
+                      class="block text-sm font-semibold text-gray-600 mb-1">
+                    Bucket Item
+                  </label>
+                  <input 
+                     id="item"
+                     name="item"
+                     type="text"
+                     aria-label="Create Bun Item"
+                     placeholder="New Bucket Item"
+                     class="w-full py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                  />
+                  <button type="submit" class="mt-2 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none">
+                    Create Bucket Item
+                  </button>
+            </form>
+            <section id="items" hx-get="/items" hx-trigger="load">
+
+            </section>
+        </main>
+    </body>
+</html>
